@@ -1,21 +1,45 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const ProductForm = () => {
+const ProductForm = (props) => {
 
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
 
+    const {products, setProducts} = props;
+
+    const formValidator = () => {
+        let isValid = true;
+        if (title.length < 2) {
+            isValid = false;
+        }
+        if (price <= 0) {
+            isValid = false;
+        }
+        if (description.length < 2) {
+            isValid = false;
+        }
+        return isValid;
+    }
+
     const submitHandler = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:8000/api/products', {
-            title,
-            price,
-            description
-        })
-            .then(res => console.log(res.data))
-            .catch(err => console.log(err))
+        if (formValidator()) {
+            axios.post('http://localhost:8000/api/products', {
+                title,
+                price,
+                description
+            })
+                .then(res => {
+                    console.log(res.data);
+                    setProducts([...products, res.data]); // 
+                })
+                .catch(err => console.log(err))
+        }
+        else {
+            // set errors
+        }
     }
 
     return (
