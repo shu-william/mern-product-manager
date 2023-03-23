@@ -15,14 +15,25 @@ const DisplayAll = (props) => {
         .catch(err => console.log(err))
     }, [])
 
+    const deleteProduct = id => {
+        axios.delete("http://localhost:8000/api/products/" + id)
+            .then(res => {
+                console.log(res.data);
+                setProducts(products.filter(product => product._id !== id));
+            })
+            .catch(err => console.log(err))
+    }
+
   return (
     <div>
         <h2>All Products:</h2>
         {
             products.map((product) => {
                 return (
-                    <div className="my-2">
-                        <Link to={`/products/${product._id}`} key={product._id}>{product.title}</Link>
+                    <div className="my-2" key={product._id}>
+                        <Link to={`/products/${product._id}`} className="mx-3">{product.title}</Link>
+                        <Link to={`/products/edit/${product._id}`} className="btn btn-sm btn-info mx-3">Edit</Link>
+                        <button onClick={(e) => {deleteProduct(product._id)}} className="btn btn-sm btn-danger">Delete</button>
                     </div>
                 )
             })

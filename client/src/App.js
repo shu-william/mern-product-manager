@@ -4,6 +4,7 @@ import { useEffect } from 'react'; */
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Main from './views/Main';
 import DisplayOne from './components/DisplayOne';
+import UpdateOne from './components/UpdateOne';
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/products" element={<Main />} />
           <Route path="/products/:id" element={<DisplayOne />} />
+          <Route path="/products/edit/:id" element={<UpdateOne />} />
         </Routes>
       </div>
     </BrowserRouter>
