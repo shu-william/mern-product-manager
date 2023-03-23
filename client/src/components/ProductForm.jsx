@@ -6,6 +6,7 @@ const ProductForm = (props) => {
     const [title, setTitle] = useState("");
     const [price, setPrice] = useState("");
     const [description, setDescription] = useState("");
+    const [errors, setErrors] = useState("");
 
     const {products, setProducts} = props;
 
@@ -25,6 +26,7 @@ const ProductForm = (props) => {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setErrors("");
         if (formValidator()) {
             axios.post('http://localhost:8000/api/products', {
                 title,
@@ -38,12 +40,13 @@ const ProductForm = (props) => {
                 .catch(err => console.log(err))
         }
         else {
-            // set errors
+            setErrors("Title and description must be more than 2 characters. Price must be greater than 0.")
         }
     }
 
     return (
         <div>
+            {errors ? <p className="text-danger">{errors}</p> : ""}
             <form className="col-md-6 mx-auto" onSubmit={submitHandler}>
                 <div className="form-group">
                     <label htmlFor="title">Product Title:</label>
@@ -57,7 +60,7 @@ const ProductForm = (props) => {
                     <label htmlFor="description">Description:</label>
                     <input type="text" name="description" id="description" onChange={(e) => setDescription(e.target.value)} className="form-control" />
                 </div>
-                <input type="submit" value="Add Product" className="btn btn-primary" />
+                <input type="submit" value="Add Product" className="btn btn-primary my-3" />
             </form>
         </div>
     )

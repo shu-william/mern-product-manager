@@ -6,13 +6,13 @@ const Main = (props) => {
 
     const [products, setProducts] = useState([]);
 
-  return (
-    <div>
-      <ProductForm products={products} setProducts={setProducts} />
-      <hr />
-      <DisplayAll products={products} setProducts={setProducts} />
-    </div>
-  )
+    return (
+        <div className="my-3">
+            <ProductForm products={products} setProducts={setProducts} />
+            <hr />
+            <DisplayAll products={products} setProducts={setProducts} />
+        </div>
+    )
 }
 
 export default Main
