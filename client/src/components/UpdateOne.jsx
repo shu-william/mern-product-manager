@@ -45,7 +45,7 @@ const UpdateOne = (props) => {
             })
             .then(res => {
                 console.log(res);
-                navigate("/products");
+                navigate("/");
             })
             .catch(err => console.log(err))
         }
@@ -71,7 +71,7 @@ const UpdateOne = (props) => {
                     <label htmlFor="description">Description:</label>
                     <input type="text" name="description" id="description" value={description} onChange={(e) => setDescription(e.target.value)} className="form-control" />
                 </div>
-                <input type="submit" value="Add Product" className="btn btn-primary my-3" />
+                <input type="submit" value="Update Product" className="btn btn-primary my-3" />
             </form>
         </div>
     )
