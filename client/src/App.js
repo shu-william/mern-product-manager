@@ -19,7 +19,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/products" element={<Main />} />
+          <Route path="/" element={<Main />} />
           <Route path="/products/:id" element={<DisplayOne />} />
           <Route path="/products/edit/:id" element={<UpdateOne />} />
         </Routes>
